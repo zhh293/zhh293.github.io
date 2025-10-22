@@ -459,6 +459,7 @@
          const response = await fetch(apiUrl, {
   headers: {
     Authorization: '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', // 替换为你生成的PAT
+    'Accept': 'application/vnd.github.v3.raw', // 新增：请求原始文件（避免GitHub API的base64编码问题）
   },
 });
           
@@ -466,12 +467,13 @@
             throw new Error(`获取文章失败（${response.status}）`);
           }
 
-          const fileData = await response.json();
-          const markdownContent = atob(fileData.content);
-          const fileName = fileData.name;
-          const dateMatch = fileName.match(/(\d{4}-\d{2}-\d{2})/);
-          const date = dateMatch ? formatDate(dateMatch[1]) : '未知日期';
-          const title = fileName.replace(/\d{4}-\d{2}-\d{2}-/, '').replace('.md', '');
+           // 直接读取原始文本（而非base64编码）
+    const markdownContent = await response.text();
+    const fileName = filePath.split('/').pop(); // 提取文件名
+    const dateMatch = fileName.match(/(\d{4}-\d{2}-\d{2})/);
+    const date = dateMatch ? formatDate(dateMatch[1]) : '未知日期';
+    const title = fileName.replace(/\d{4}-\d{2}-\d{2}-/, '').replace('.md', '');
+
 
           document.getElementById('modal-title').textContent = title;
           document.getElementById('modal-date').textContent = date;
