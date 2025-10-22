@@ -388,7 +388,11 @@
 
         try {
           const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents/${POSTS_FOLDER}`;
-          const response = await fetch(apiUrl);
+          const response = await fetch(apiUrl, {
+  headers: {
+    Authorization: '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', // 替换为你生成的PAT
+  },
+});
           
           if (!response.ok) {
             if (response.status === 404) {
@@ -452,7 +456,11 @@
       window.openBlogDetail = async function(filePath) {
         try {
           const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents/${filePath}`;
-          const response = await fetch(apiUrl);
+         const response = await fetch(apiUrl, {
+  headers: {
+    Authorization: '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', // 替换为你生成的PAT
+  },
+});
           
           if (!response.ok) {
             throw new Error(`获取文章失败（${response.status}）`);
