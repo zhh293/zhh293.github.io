@@ -3,48 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>张鸿昊 | 个人博客与项目展示</title>
-  <!-- 引入 Tailwind CSS -->
+  <title>你的名字 | 个人博客与项目展示</title>
+  <!-- 外部资源 -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 引入 Font Awesome 图标 -->
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <!-- 自定义 Tailwind 配置（颜色、字体） -->
+  <!-- Markdown 渲染器 -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@4.0.2/marked.min.js"></script>
+  <!-- 代码高亮（可选，让Markdown中的代码块美观） -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github-dark.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script>
+
+  <!-- Tailwind 配置 -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            primary: '#2563eb', // 主色调：蓝色（专业感）
-            dark: '#1e293b',   // 深色：用于背景和文字
-            light: '#f8fafc',  // 浅色：用于卡片背景
+            primary: '#2563eb',
+            dark: '#1e293b',
+            light: '#f8fafc',
           },
           fontFamily: {
-            inter: ['Inter', 'system-ui', 'sans-serif'], // 无衬线字体，保证跨平台可读性
+            inter: ['Inter', 'system-ui', 'sans-serif'],
           },
         },
       }
     }
   </script>
-  <!-- 自定义工具类 -->
   <style type="text/tailwindcss">
     @layer utilities {
-      .content-auto {
-        content-visibility: auto;
-      }
-      .text-balance {
-        text-wrap: balance;
-      }
+      .content-auto { content-visibility: auto; }
+      .text-balance { text-wrap: balance; }
     }
   </style>
   <style>
-    /* 基础动画：hover 效果 */
-    .card-hover {
-      transition: all 0.3s ease;
-    }
-    .card-hover:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+    /* Markdown 渲染样式优化 */
+    .markdown-content h1 { font-size: 1.8rem; font-weight: bold; margin: 1.5rem 0 1rem; }
+    .markdown-content h2 { font-size: 1.5rem; font-weight: bold; margin: 1.2rem 0 0.8rem; }
+    .markdown-content p { margin-bottom: 1rem; line-height: 1.6; }
+    .markdown-content ul, .markdown-content ol { margin-left: 1.5rem; margin-bottom: 1rem; }
+    .markdown-content ul { list-style-type: disc; }
+    .markdown-content ol { list-style-type: decimal; }
+    .markdown-content pre { background: #1e293b; color: white; padding: 1rem; border-radius: 4px; margin-bottom: 1rem; overflow-x: auto; }
+    .markdown-content code { font-family: monospace; }
+    .markdown-content blockquote { border-left: 4px solid #2563eb; padding-left: 1rem; margin-left: 0; margin-bottom: 1rem; color: #64748b; }
+    .markdown-content img { max-width: 100%; border-radius: 4px; margin: 1rem 0; }
   </style>
 </head>
 <body class="font-inter bg-gray-50 text-dark">
@@ -52,21 +57,22 @@
   <nav class="fixed w-full top-0 bg-white shadow-md z-50">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
       <a href="#" class="text-primary font-bold text-xl flex items-center">
-        <i class="fa fa-code mr-2"></i>张鸿昊
+        <i class="fa fa-code mr-2"></i>你的名字
       </a>
       <div class="hidden md:flex space-x-8">
         <a href="#home" class="hover:text-primary transition-colors">首页</a>
         <a href="#blog" class="hover:text-primary transition-colors">博客</a>
         <a href="#projects" class="hover:text-primary transition-colors">项目</a>
         <a href="#about" class="hover:text-primary transition-colors">关于</a>
+        <a href="#blog-guide" class="hover:text-primary transition-colors">博客管理</a>
       </div>
-      <button class="md:hidden text-dark">
+      <button class="md:hidden text-dark" id="mobile-menu-btn">
         <i class="fa fa-bars text-xl"></i>
       </button>
     </div>
   </nav>
 
-  <!-- 英雄区域（首页） -->
+  <!-- 英雄区域 -->
   <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-light">
     <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
       <div class="md:w-1/2 mb-8 md:mb-0">
@@ -93,59 +99,77 @@
     </div>
   </section>
 
-  <!-- 博客区域 -->
+  <!-- 博客列表区域（核心修改） -->
   <section id="blog" class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold mb-10 text-center">技术博客</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- 博客卡片 1 -->
-        <div class="bg-light rounded-lg overflow-hidden card-hover">
-          <img src="https://picsum.photos/600/400?random=1" alt="博客封面" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <span class="text-sm text-gray-500">2025-10-20</span>
-            <h3 class="text-xl font-bold mt-2 mb-3">如何从零搭建一个高效的前端工程化流程</h3>
-            <p class="text-gray-600 mb-4">详解前端工程化中的构建工具、代码规范、自动化测试等核心环节，让项目迭代更高效...</p>
-            <a href="#" class="text-primary font-medium flex items-center hover:underline">
-              阅读全文 <i class="fa fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- 博客卡片 2 -->
-        <div class="bg-light rounded-lg overflow-hidden card-hover">
-          <img src="https://picsum.photos/600/400?random=2" alt="博客封面" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <span class="text-sm text-gray-500">2025-10-15</span>
-            <h3 class="text-xl font-bold mt-2 mb-3">微服务架构下的分布式事务解决方案对比</h3>
-            <p class="text-gray-600 mb-4">分析几种主流分布式事务方案的适用场景、性能开销与实现复杂度，帮你做出技术选型...</p>
-            <a href="#" class="text-primary font-medium flex items-center hover:underline">
-              阅读全文 <i class="fa fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- 博客卡片 3 -->
-        <div class="bg-light rounded-lg overflow-hidden card-hover">
-          <img src="https://picsum.photos/600/400?random=3" alt="博客封面" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <span class="text-sm text-gray-500">2025-10-10</span>
-            <h3 class="text-xl font-bold mt-2 mb-3">AI 时代的前端开发：低代码与自动化工具的未来</h3>
-            <p class="text-gray-600 mb-4">探讨 AI 如何重塑前端开发流程，低代码平台与自动化工具的技术趋势和落地实践...</p>
-            <a href="#" class="text-primary font-medium flex items-center hover:underline">
-              阅读全文 <i class="fa fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="text-center mt-10">
-        <a href="#" class="inline-block border border-primary text-primary px-6 py-2 rounded-md hover:bg-primary hover:text-white transition-colors">
-          查看更多博客
-        </a>
+      <div id="blog-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 博客列表将通过JavaScript动态生成 -->
+        <div class="col-span-full text-center py-10">加载中...</div>
       </div>
     </div>
   </section>
 
-  <!-- 项目区域 -->
+  <!-- 博客详情模态框 -->
+  <div id="blog-modal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg p-6 md:p-8">
+      <div class="flex justify-between items-center mb-4">
+        <h3 id="modal-title" class="text-2xl font-bold"></h3>
+        <button id="close-modal" class="text-gray-500 hover:text-dark">
+          <i class="fa fa-times text-xl"></i>
+        </button>
+      </div>
+      <div class="text-sm text-gray-500 mb-6" id="modal-date"></div>
+      <div id="modal-content" class="markdown-content"></div>
+    </div>
+  </div>
+
+  <!-- 博客管理指南（新增，教用户如何操作） -->
+  <section id="blog-guide" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-10 text-center">博客管理指南</h2>
+      <div class="bg-white rounded-lg shadow p-6 md:p-8 max-w-3xl mx-auto">
+        <h3 class="text-xl font-bold mb-4">如何发布新博客？</h3>
+        <ol class="list-decimal pl-5 mb-6 space-y-2">
+          <li>在你的 GitHub 仓库中，进入 <code class="bg-gray-100 px-1 py-0.5 rounded">posts</code> 文件夹</li>
+          <li>点击右上角 <strong>"Add file" → "Create new file"</strong></li>
+          <li>文件名格式：<code class="bg-gray-100 px-1 py-0.5 rounded">YYYY-MM-DD-文章标题.md</code>（例如：2025-10-20-前端工程化.md）</li>
+          <li>用 Markdown 语法编写博客内容（支持标题、代码块、图片等）</li>
+          <li>拉到页面底部，点击 <strong>"Commit new file"</strong> 提交</li>
+          <li>等待 1-5 分钟，博客会自动显示在网站上</li>
+        </ol>
+
+        <h3 class="text-xl font-bold mb-4">如何编辑/删除博客？</h3>
+        <ul class="list-disc pl-5 mb-6 space-y-2">
+          <li><strong>编辑</strong>：进入 <code class="bg-gray-100 px-1 py-0.5 rounded">posts</code> 文件夹，点击要修改的文章，点击右上角铅笔图标修改后提交</li>
+          <li><strong>删除</strong>：进入 <code class="bg-gray-100 px-1 py-0.5 rounded">posts</code> 文件夹，点击要删除的文章，点击右上角垃圾桶图标确认删除</li>
+        </ul>
+
+        <h3 class="text-xl font-bold mb-4">Markdown 常用语法参考</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div class="bg-gray-50 p-3 rounded">
+            <p><code class="bg-white px-1 py-0.5 rounded"># 标题</code> → 一级标题</p>
+            <p><code class="bg-white px-1 py-0.5 rounded">## 标题</code> → 二级标题</p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded">
+            <p><code class="bg-white px-1 py-0.5 rounded">**粗体**</code> → <strong>粗体</strong></p>
+            <p><code class="bg-white px-1 py-0.5 rounded">*斜体*</code> → <em>斜体</em></p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded">
+            <p><code class="bg-white px-1 py-0.5 rounded">[链接文字](url)</code> → <a href="#">链接文字</a></p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded">
+            <p><code class="bg-white px-1 py-0.5 rounded">![图片描述](图片url)</code> → 插入图片</p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded md:col-span-2">
+            <p><code class="bg-white px-1 py-0.5 rounded">```js<br>const a = 1;<br>```</code> → 代码块（支持语法高亮）</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 项目区域（保持不变） -->
   <section id="projects" class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold mb-10 text-center">项目展示</h2>
@@ -219,7 +243,7 @@
     </div>
   </section>
 
-  <!-- 关于区域 -->
+  <!-- 关于区域（保持不变） -->
   <section id="about" class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold mb-10 text-center">关于我</h2>
@@ -262,7 +286,7 @@
     </div>
   </section>
 
-  <!-- 页脚 -->
+  <!-- 页脚（保持不变） -->
   <footer class="bg-dark text-white py-10">
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between items-center">
@@ -294,43 +318,159 @@
   </button>
 
   <script>
-    // 回到顶部功能
-    const backToTopBtn = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.classList.remove('opacity-0', 'invisible');
-        backToTopBtn.classList.add('opacity-100', 'visible');
-      } else {
-        backToTopBtn.classList.add('opacity-0', 'invisible');
-        backToTopBtn.classList.remove('opacity-100', 'visible');
-      }
+    // 核心：通过 GitHub API 读取 posts 文件夹下的 Markdown 文件
+    const GITHUB_USER = 'zhh293'; // 替换为你的 GitHub 用户名
+    const REPO_NAME = 'zhh293.github.io'; // 替换为你的仓库名
+    const POSTS_FOLDER = 'posts'; // 博客存放的文件夹名
+
+    // 页面加载完成后初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      // 初始化代码高亮
+      hljs.highlightAll();
+      
+      // 加载博客列表
+      loadBlogList();
+      
+      // 绑定事件
+      bindEvents();
     });
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+
+    // 绑定页面事件
+    function bindEvents() {
+      // 关闭博客详情模态框
+      document.getElementById('close-modal').addEventListener('click', () => {
+        document.getElementById('blog-modal').classList.add('hidden');
       });
-    });
 
-    // 导航栏滚动效果
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('py-2');
-        nav.classList.remove('py-3');
-      } else {
-        nav.classList.add('py-3');
-        nav.classList.remove('py-2');
-      }
-    });
+      // 回到顶部按钮
+      const backToTopBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.remove('opacity-0', 'invisible');
+          backToTopBtn.classList.add('opacity-100', 'visible');
+        } else {
+          backToTopBtn.classList.add('opacity-0', 'invisible');
+          backToTopBtn.classList.remove('opacity-100', 'visible');
+        }
+      });
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
 
-    // 移动端菜单（示例，可根据需要完善）
-    const menuBtn = document.querySelector('button.md\\:hidden');
-    if (menuBtn) {
-      menuBtn.addEventListener('click', () => {
-        alert('移动端菜单功能可根据需求扩展~');
+      // 移动端菜单（简单实现）
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      mobileMenuBtn.addEventListener('click', () => {
+        alert('移动端菜单可根据需求扩展，当前点击仅作示例~');
       });
     }
+
+    // 1. 加载博客列表（通过 GitHub API 获取 posts 文件夹下的所有文件）
+    async function loadBlogList() {
+      const blogListEl = document.getElementById('blog-list');
+      blogListEl.innerHTML = '<div class="col-span-full text-center py-10">加载中...</div>';
+
+      try {
+        // 调用 GitHub API 获取 posts 文件夹下的文件列表
+        const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents/${POSTS_FOLDER}`;
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+          throw new Error(`获取文件列表失败（${response.status}）`);
+        }
+
+        const files = await response.json();
+        if (!files.length) {
+          blogListEl.innerHTML = '<div class="col-span-full text-center py-10">暂无博客文章，快去发布第一篇吧！</div>';
+          return;
+        }
+
+        // 过滤出 .md 文件，并按日期排序（最新的在前）
+        const mdFiles = files
+          .filter(file => file.name.endsWith('.md'))
+          .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+
+        // 生成博客列表 HTML
+        blogListEl.innerHTML = '';
+        mdFiles.forEach(file => {
+          // 解析文件名：YYYY-MM-DD-标题.md → 提取日期和标题
+          const fileName = file.name;
+          const dateMatch = fileName.match(/(\d{4}-\d{2}-\d{2})/);
+          const date = dateMatch ? dateMatch[1] : '未知日期';
+          const title = fileName.replace(/\d{4}-\d{2}-\d{2}-/, '').replace('.md', '');
+
+          blogListEl.innerHTML += `
+            <div class="bg-light rounded-lg overflow-hidden card-hover" onclick="openBlogDetail('${file.path}')">
+              <img src="https://picsum.photos/600/400?random=${fileName.substring(0,5)}" alt="博客封面" class="w-full h-48 object-cover">
+              <div class="p-6">
+                <span class="text-sm text-gray-500">${formatDate(date)}</span>
+                <h3 class="text-xl font-bold mt-2 mb-3">${title}</h3>
+                <p class="text-gray-600 mb-4 line-clamp-3">点击查看全文...</p>
+                <a href="#" class="text-primary font-medium flex items-center hover:underline">
+                  阅读全文 <i class="fa fa-arrow-right ml-2"></i>
+                </a>
+              </div>
+            </div>
+          `;
+        });
+
+      } catch (error) {
+        blogListEl.innerHTML = `
+          <div class="col-span-full text-center py-10 text-red-500">
+            加载失败：${error.message}<br>
+            请检查 GitHub 用户名和仓库名是否正确
+          </div>
+        `;
+        console.error('加载博客列表出错：', error);
+      }
+    }
+
+    // 2. 打开博客详情（通过 GitHub API 获取 Markdown 内容并渲染）
+    async function openBlogDetail(filePath) {
+      try {
+        // 调用 GitHub API 获取单个 Markdown 文件内容（base64 编码）
+        const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents/${filePath}`;
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+          throw new Error(`获取文章失败（${response.status}）`);
+        }
+
+        const fileData = await response.json();
+        // 解码 base64 内容
+        const markdownContent = atob(fileData.content);
+        // 解析文件名获取标题和日期
+        const fileName = fileData.name;
+        const dateMatch = fileName.match(/(\d{4}-\d{2}-\d{2})/);
+        const date = dateMatch ? formatDate(dateMatch[1]) : '未知日期';
+        const title = fileName.replace(/\d{4}-\d{2}-\d{2}-/, '').replace('.md', '');
+
+        // 填充模态框内容
+        document.getElementById('modal-title').textContent = title;
+        document.getElementById('modal-date').textContent = date;
+        document.getElementById('modal-content').innerHTML = marked.parse(markdownContent);
+        // 对渲染后的代码块重新应用高亮
+        hljs.highlightAll();
+        // 显示模态框
+        document.getElementById('blog-modal').classList.remove('hidden');
+
+      } catch (error) {
+        alert(`加载文章失败：${error.message}`);
+        console.error('加载博客详情出错：', error);
+      }
+    }
+
+    // 工具函数：格式化日期（YYYY-MM-DD → 年月日）
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('zh-CN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
+    // 暴露函数到全局（供 HTML 中 onclick 调用）
+    window.openBlogDetail = openBlogDetail;
   </script>
 </body>
 </html>
