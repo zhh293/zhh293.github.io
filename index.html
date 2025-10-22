@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>你的名字 | 个人博客与项目展示</title>
+  <title>张鸿昊 | 个人博客与项目展示</title>
   <!-- 外部资源 -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- Markdown 渲染器 -->
   <script src="https://cdn.jsdelivr.net/npm/marked@4.0.2/marked.min.js"></script>
-  <!-- 代码高亮（可选，让Markdown中的代码块美观） -->
+  <!-- 代码高亮 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github-dark.min.css">
   <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script>
 
@@ -39,7 +39,7 @@
   <style>
     .card-hover { transition: all 0.3s ease; }
     .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
-    /* Markdown 渲染样式优化 */
+    /* Markdown 样式优化 */
     .markdown-content h1 { font-size: 1.8rem; font-weight: bold; margin: 1.5rem 0 1rem; }
     .markdown-content h2 { font-size: 1.5rem; font-weight: bold; margin: 1.2rem 0 0.8rem; }
     .markdown-content p { margin-bottom: 1rem; line-height: 1.6; }
@@ -57,7 +57,7 @@
   <nav class="fixed w-full top-0 bg-white shadow-md z-50">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
       <a href="#" class="text-primary font-bold text-xl flex items-center">
-        <i class="fa fa-code mr-2"></i>你的名字
+        <i class="fa fa-code mr-2"></i>张鸿昊
       </a>
       <div class="hidden md:flex space-x-8">
         <a href="#home" class="hover:text-primary transition-colors">首页</a>
@@ -77,10 +77,10 @@
     <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
       <div class="md:w-1/2 mb-8 md:mb-0">
         <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-4">
-          专注技术与创新的<br><span class="text-primary">个人博客</span>
+          专注技术与创新的<br><span class="text-primary">全栈开发工程师</span>
         </h1>
         <p class="text-gray-600 text-lg mb-6 text-balance">
-          分享我的技术思考、项目实践与行业见解，打造简约且专业的知识展示平台。
+          热衷于后端架构与AI应用，擅长分布式系统设计与性能优化，持续分享技术实践与思考。
         </p>
         <div class="flex space-x-4">
           <a href="#blog" class="bg-primary text-white px-6 py-3 rounded-md hover:bg-primary/90 transition-colors">
@@ -92,14 +92,15 @@
         </div>
       </div>
       <div class="md:w-1/2 flex justify-center">
-        <div class="w-48 h-48 md:w-64 md:h-64 rounded-full bg-primary/10 flex items-center justify-center">
-          <i class="fa fa-user text-6xl text-primary"></i>
+        <!-- 绘梨衣头像（使用占位图，可替换为实际图片链接） -->
+        <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-lg border-4 border-primary/20">
+          <img src="https://picsum.photos/200/200?random=10" alt="绘梨衣头像" class="w-full h-full object-cover">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 博客列表区域（核心修改） -->
+  <!-- 博客列表区域 -->
   <section id="blog" class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold mb-10 text-center">技术博客</h2>
@@ -124,7 +125,7 @@
     </div>
   </div>
 
-  <!-- 博客管理指南（新增，教用户如何操作） -->
+  <!-- 博客管理指南 -->
   <section id="blog-guide" class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold mb-10 text-center">博客管理指南</h2>
@@ -133,7 +134,7 @@
         <ol class="list-decimal pl-5 mb-6 space-y-2">
           <li>在你的 GitHub 仓库中，进入 <code class="bg-gray-100 px-1 py-0.5 rounded">posts</code> 文件夹</li>
           <li>点击右上角 <strong>"Add file" → "Create new file"</strong></li>
-          <li>文件名格式：<code class="bg-gray-100 px-1 py-0.5 rounded">YYYY-MM-DD-文章标题.md</code>（例如：2025-10-20-前端工程化.md）</li>
+          <li>文件名格式：<code class="bg-gray-100 px-1 py-0.5 rounded">YYYY-MM-DD-文章标题.md</code>（例如：2025-10-20-分布式缓存设计.md）</li>
           <li>用 Markdown 语法编写博客内容（支持标题、代码块、图片等）</li>
           <li>拉到页面底部，点击 <strong>"Commit new file"</strong> 提交</li>
           <li>等待 1-5 分钟，博客会自动显示在网站上</li>
@@ -162,79 +163,83 @@
             <p><code class="bg-white px-1 py-0.5 rounded">![图片描述](图片url)</code> → 插入图片</p>
           </div>
           <div class="bg-gray-50 p-3 rounded md:col-span-2">
-            <p><code class="bg-white px-1 py-0.5 rounded">```js<br>const a = 1;<br>```</code> → 代码块（支持语法高亮）</p>
+            <p><code class="bg-white px-1 py-0.5 rounded">```java<br>public class Demo {}<br>```</code> → 代码块（支持语法高亮）</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 项目区域（保持不变） -->
+  <!-- 项目区域（替换为你的精选项目） -->
   <section id="projects" class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-10 text-center">项目展示</h2>
+      <h2 class="text-3xl font-bold mb-10 text-center">精选项目</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- 项目卡片 1 -->
+        <!-- 项目1: -RPC- -->
         <div class="bg-white rounded-lg overflow-hidden card-hover">
-          <img src="https://picsum.photos/600/400?random=4" alt="项目截图" class="w-full h-48 object-cover">
+          <img src="https://picsum.photos/600/400?random=1" alt="RPC框架项目截图" class="w-full h-48 object-cover">
           <div class="p-6">
-            <h3 class="text-xl font-bold mb-2">智能任务管理系统</h3>
+            <h3 class="text-xl font-bold mb-2">-RPC-</h3>
             <div class="flex flex-wrap gap-2 mb-4">
-              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">React</span>
-              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Node.js</span>
-              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">MongoDB</span>
+              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Java</span>
+              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Netty</span>
+              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">分布式</span>
+              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Spring</span>
             </div>
-            <p class="text-gray-600 mb-4">基于全栈技术构建的任务管理平台，支持多端同步、智能提醒与团队协作，提升工作效率...</p>
+            <p class="text-gray-600 mb-4">包含简易聊天室实现与轻量级RPC框架，支持服务注册发现、负载均衡与序列化协议定制，用于理解分布式通信原理。</p>
             <div class="flex space-x-4">
-              <a href="#" class="text-primary font-medium hover:underline">
+              <a href="https://github.com/zhh293/-RPC-" class="text-primary font-medium hover:underline" target="_blank">
                 <i class="fa fa-github mr-1"></i> 源码
               </a>
-              <a href="#" class="text-primary font-medium hover:underline">
-                <i class="fa fa-link mr-1"></i> 预览
+              <a href="https://github.com/zhh293/-RPC-" class="text-primary font-medium hover:underline" target="_blank">
+                <i class="fa fa-link mr-1"></i> 详情
               </a>
             </div>
           </div>
         </div>
 
-        <!-- 项目卡片 2 -->
+        <!-- 项目2: JavaTwiceCache -->
         <div class="bg-white rounded-lg overflow-hidden card-hover">
-          <img src="https://picsum.photos/600/400?random=5" alt="项目截图" class="w-full h-48 object-cover">
+          <img src="https://picsum.photos/600/400?random=2" alt="二级缓存项目截图" class="w-full h-48 object-cover">
           <div class="p-6">
-            <h3 class="text-xl font-bold mb-2">数据可视化仪表盘</h3>
+            <h3 class="text-xl font-bold mb-2">JavaTwiceCache</h3>
             <div class="flex flex-wrap gap-2 mb-4">
-              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Vue</span>
-              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">ECharts</span>
+              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Java</span>
+              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Redis</span>
+              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">JUC</span>
+              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">缓存</span>
+            </div>
+            <p class="text-gray-600 mb-4">基于Java实现的二级缓存框架，整合本地缓存与Redis分布式缓存，支持缓存穿透/击穿/雪崩防护，可配置过期策略与刷新机制。</p>
+            <div class="flex space-x-4">
+              <a href="https://github.com/zhh293/JavaTwiceCache" class="text-primary font-medium hover:underline" target="_blank">
+                <i class="fa fa-github mr-1"></i> 源码
+              </a>
+              <a href="https://github.com/zhh293/JavaTwiceCache" class="text-primary font-medium hover:underline" target="_blank">
+                <i class="fa fa-link mr-1"></i> 详情
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 项目3: jobsensebackpart -->
+        <div class="bg-white rounded-lg overflow-hidden card-hover">
+          <img src="https://picsum.photos/600/400?random=3" alt="求职分析平台后端截图" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">jobsensebackpart</h3>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Spring Boot</span>
+              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">MySQL</span>
+              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Elasticsearch</span>
+              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">RabbitMQ</span>
               <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Docker</span>
             </div>
-            <p class="text-gray-600 mb-4">面向企业的数据分析平台，支持自定义报表、实时监控与多维度数据挖掘，助力业务决策...</p>
+            <p class="text-gray-600 mb-4">求职信息分析平台后端服务，提供职位爬取、智能推荐、薪资分析功能，采用微服务架构，支持高并发与数据持久化。</p>
             <div class="flex space-x-4">
-              <a href="#" class="text-primary font-medium hover:underline">
+              <a href="https://github.com/Arisgod1/jobsensebackpart" class="text-primary font-medium hover:underline" target="_blank">
                 <i class="fa fa-github mr-1"></i> 源码
               </a>
-              <a href="#" class="text-primary font-medium hover:underline">
-                <i class="fa fa-link mr-1"></i> 预览
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 项目卡片 3 -->
-        <div class="bg-white rounded-lg overflow-hidden card-hover">
-          <img src="https://picsum.photos/600/400?random=6" alt="项目截图" class="w-full h-48 object-cover">
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2">个人博客系统（当前站点）</h3>
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">HTML</span>
-              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Tailwind CSS</span>
-              <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">GitHub Pages</span>
-            </div>
-            <p class="text-gray-600 mb-4">简约风格的个人博客与项目展示站，基于静态页面技术构建，部署于 GitHub Pages，专注内容表达...</p>
-            <div class="flex space-x-4">
-              <a href="https://github.com/zhh293/zhh293.github.io" class="text-primary font-medium hover:underline" target="_blank">
-                <i class="fa fa-github mr-1"></i> 源码
-              </a>
-              <a href="https://zhh293.github.io" class="text-primary font-medium hover:underline" target="_blank">
-                <i class="fa fa-link mr-1"></i> 预览
+              <a href="https://github.com/Arisgod1/jobsensebackpart" class="text-primary font-medium hover:underline" target="_blank">
+                <i class="fa fa-link mr-1"></i> 详情
               </a>
             </div>
           </div>
@@ -243,42 +248,53 @@
     </div>
   </section>
 
-  <!-- 关于区域（保持不变） -->
+  <!-- 关于区域（更新个人信息和技术栈） -->
   <section id="about" class="py-16 bg-white">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold mb-10 text-center">关于我</h2>
       <div class="flex flex-col md:flex-row items-center gap-8">
         <div class="md:w-1/3 flex justify-center">
-          <div class="w-40 h-40 rounded-full bg-primary/10 flex items-center justify-center">
-            <i class="fa fa-user text-5xl text-primary"></i>
+          <!-- 绘梨衣头像 -->
+          <div class="w-40 h-40 rounded-full overflow-hidden shadow-lg border-4 border-primary/20">
+            <img src="https://picsum.photos/200/200?random=10" alt="绘梨衣头像" class="w-full h-full object-cover">
           </div>
         </div>
         <div class="md:w-2/3">
           <p class="text-gray-700 text-lg mb-6">
-            我是一名专注于全栈开发的工程师，热爱技术探索与知识分享。擅长前端工程化、后端服务架构与数据可视化，
-            坚信技术的价值在于解决实际问题与创造用户价值。
+            我是张鸿昊，一名专注于全栈开发的工程师，擅长后端架构设计与AI应用落地。热衷研究分布式系统、缓存策略与高性能服务优化，
+            同时关注前端工程化与用户体验。在LeetCode持续刷题提升算法能力，喜欢通过技术博客沉淀实践经验。
           </p>
           <h3 class="text-xl font-bold mb-4">技术栈</h3>
           <div class="flex flex-wrap gap-3 mb-6">
-            <span class="px-4 py-2 bg-gray-100 rounded-full">JavaScript/TypeScript</span>
-            <span class="px-4 py-2 bg-gray-100 rounded-full">React/Vue</span>
-            <span class="px-4 py-2 bg-gray-100 rounded-full">Node.js</span>
-            <span class="px-4 py-2 bg-gray-100 rounded-full">Docker/Kubernetes</span>
-            <span class="px-4 py-2 bg-gray-100 rounded-full">MySQL/MongoDB</span>
+            <!-- 后端技术 -->
+            <span class="px-4 py-2 bg-gray-100 rounded-full">Java</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">Spring全家桶</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">Python</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">PyTorch</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">MySQL</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">Redis</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">Elasticsearch</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">RabbitMQ</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">MongoDB</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">JUC</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">Netty</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">Linux</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">Nginx</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">Docker</span>
+            <!-- 前端技术 -->
+            <span class="px-4 py-2 bg-gray-100 rounded-full">JavaScript</span>
+            <span class="px-4 py-2 bg-gray-100 rounded-full">Vue</span>
           </div>
           <h3 class="text-xl font-bold mb-4">联系方式</h3>
-          <div class="flex space-x-6">
-            <a href="#" class="text-gray-600 hover:text-primary transition-colors">
-              <i class="fa fa-github text-2xl"></i>
+          <div class="flex flex-wrap gap-6">
+            <a href="mailto:928198963@qq.com" class="text-gray-600 hover:text-primary transition-colors flex items-center">
+              <i class="fa fa-envelope text-xl mr-2"></i> 928198963@qq.com
             </a>
-            <a href="#" class="text-gray-600 hover:text-primary transition-colors">
-              <i class="fa fa-linkedin text-2xl"></i>
+            <a href="http://leetcode.com/DREAMY_GATEWAY" target="_blank" class="text-gray-600 hover:text-primary transition-colors flex items-center">
+              <i class="fa fa-code text-xl mr-2"></i> LeetCode
             </a>
-            <a href="#" class="text-gray-600 hover:text-primary transition-colors">
-              <i class="fa fa-envelope text-2xl"></i>
-            </a>
-            <a href="#" class="text-gray-600 hover:text-primary transition-colors">
-              <i class="fa fa-weixin text-2xl"></i>
+            <a href="https://github.com/zhh293" target="_blank" class="text-gray-600 hover:text-primary transition-colors flex items-center">
+              <i class="fa fa-github text-xl mr-2"></i> GitHub
             </a>
           </div>
         </div>
@@ -286,28 +302,28 @@
     </div>
   </section>
 
-  <!-- 页脚（保持不变） -->
+  <!-- 页脚 -->
   <footer class="bg-dark text-white py-10">
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <div class="mb-6 md:mb-0">
-          <p class="text-lg font-bold">你的名字 | 个人博客</p>
-          <p class="text-gray-400">专注技术分享与项目展示</p>
+          <p class="text-lg font-bold">张鸿昊 | 全栈开发工程师</p>
+          <p class="text-gray-400">专注技术分享与项目实践</p>
         </div>
         <div class="flex space-x-4">
-          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+          <a href="https://github.com/zhh293" target="_blank" class="text-gray-400 hover:text-white transition-colors">
             <i class="fa fa-github text-xl"></i>
           </a>
-          <a href="#" class="text-gray-400 hover:text-white transition-colors">
-            <i class="fa fa-linkedin text-xl"></i>
+          <a href="http://leetcode.com/DREAMY_GATEWAY" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+            <i class="fa fa-code text-xl"></i>
           </a>
-          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+          <a href="mailto:928198963@qq.com" class="text-gray-400 hover:text-white transition-colors">
             <i class="fa fa-envelope text-xl"></i>
           </a>
         </div>
       </div>
       <div class="mt-8 text-center text-gray-400 text-sm">
-        <p>© 2025 你的名字. 保留所有权利.</p>
+        <p>© 2025 张鸿昊. 保留所有权利.</p>
       </div>
     </div>
   </footer>
@@ -318,24 +334,19 @@
   </button>
 
   <script>
-    // 核心：通过 GitHub API 读取 posts 文件夹下的 Markdown 文件
-    const GITHUB_USER = 'zhh293'; // 替换为你的 GitHub 用户名
-    const REPO_NAME = 'zhh293.github.io'; // 替换为你的仓库名
-    const POSTS_FOLDER = 'posts'; // 博客存放的文件夹名
+    // GitHub 仓库配置
+    const GITHUB_USER = 'zhh293';
+    const REPO_NAME = 'zhh293.github.io';
+    const POSTS_FOLDER = 'posts';
 
     // 页面加载完成后初始化
     document.addEventListener('DOMContentLoaded', () => {
-      // 初始化代码高亮
       hljs.highlightAll();
-      
-      // 加载博客列表
       loadBlogList();
-      
-      // 绑定事件
       bindEvents();
     });
 
-    // 绑定页面事件
+    // 绑定事件
     function bindEvents() {
       // 关闭博客详情模态框
       document.getElementById('close-modal').addEventListener('click', () => {
@@ -357,24 +368,33 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // 移动端菜单（简单实现）
+      // 移动端菜单
       const mobileMenuBtn = document.getElementById('mobile-menu-btn');
       mobileMenuBtn.addEventListener('click', () => {
-        alert('移动端菜单可根据需求扩展，当前点击仅作示例~');
+        alert('移动端菜单可扩展，点击查看导航：首页 / 博客 / 项目 / 关于');
       });
     }
 
-    // 1. 加载博客列表（通过 GitHub API 获取 posts 文件夹下的所有文件）
+    // 加载博客列表
     async function loadBlogList() {
       const blogListEl = document.getElementById('blog-list');
       blogListEl.innerHTML = '<div class="col-span-full text-center py-10">加载中...</div>';
 
       try {
-        // 调用 GitHub API 获取 posts 文件夹下的文件列表
         const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents/${POSTS_FOLDER}`;
         const response = await fetch(apiUrl);
         
         if (!response.ok) {
+          if (response.status === 404) {
+            // 若posts文件夹不存在，提示创建
+            blogListEl.innerHTML = `
+              <div class="col-span-full text-center py-10">
+                暂无博客文章<br>
+                请按照"博客管理指南"创建第一篇文章
+              </div>
+            `;
+            return;
+          }
           throw new Error(`获取文件列表失败（${response.status}）`);
         }
 
@@ -384,15 +404,14 @@
           return;
         }
 
-        // 过滤出 .md 文件，并按日期排序（最新的在前）
+        // 过滤.md文件并排序
         const mdFiles = files
           .filter(file => file.name.endsWith('.md'))
           .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
 
-        // 生成博客列表 HTML
+        // 生成博客列表
         blogListEl.innerHTML = '';
         mdFiles.forEach(file => {
-          // 解析文件名：YYYY-MM-DD-标题.md → 提取日期和标题
           const fileName = file.name;
           const dateMatch = fileName.match(/(\d{4}-\d{2}-\d{2})/);
           const date = dateMatch ? dateMatch[1] : '未知日期';
@@ -417,17 +436,16 @@
         blogListEl.innerHTML = `
           <div class="col-span-full text-center py-10 text-red-500">
             加载失败：${error.message}<br>
-            请检查 GitHub 用户名和仓库名是否正确
+            请检查 GitHub 仓库配置
           </div>
         `;
         console.error('加载博客列表出错：', error);
       }
     }
 
-    // 2. 打开博客详情（通过 GitHub API 获取 Markdown 内容并渲染）
+    // 打开博客详情
     async function openBlogDetail(filePath) {
       try {
-        // 调用 GitHub API 获取单个 Markdown 文件内容（base64 编码）
         const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${REPO_NAME}/contents/${filePath}`;
         const response = await fetch(apiUrl);
         
@@ -436,21 +454,16 @@
         }
 
         const fileData = await response.json();
-        // 解码 base64 内容
         const markdownContent = atob(fileData.content);
-        // 解析文件名获取标题和日期
         const fileName = fileData.name;
         const dateMatch = fileName.match(/(\d{4}-\d{2}-\d{2})/);
         const date = dateMatch ? formatDate(dateMatch[1]) : '未知日期';
         const title = fileName.replace(/\d{4}-\d{2}-\d{2}-/, '').replace('.md', '');
 
-        // 填充模态框内容
         document.getElementById('modal-title').textContent = title;
         document.getElementById('modal-date').textContent = date;
         document.getElementById('modal-content').innerHTML = marked.parse(markdownContent);
-        // 对渲染后的代码块重新应用高亮
         hljs.highlightAll();
-        // 显示模态框
         document.getElementById('blog-modal').classList.remove('hidden');
 
       } catch (error) {
@@ -459,7 +472,7 @@
       }
     }
 
-    // 工具函数：格式化日期（YYYY-MM-DD → 年月日）
+    // 格式化日期
     function formatDate(dateString) {
       const date = new Date(dateString);
       return date.toLocaleDateString('zh-CN', {
@@ -469,7 +482,7 @@
       });
     }
 
-    // 暴露函数到全局（供 HTML 中 onclick 调用）
+    // 暴露全局函数
     window.openBlogDetail = openBlogDetail;
   </script>
 </body>
